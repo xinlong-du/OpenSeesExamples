@@ -1,0 +1,108 @@
+Current Domain Information
+	Current Time: 0
+tCommitted Time: 0
+
+NODE DATA: NumNodes: 21
+
+ Node: 1
+	Coordinates  : 0 0 0 
+
+
+ Node: 2
+	Coordinates  : 300 0 0 
+
+
+ Node: 3
+	Coordinates  : 600 0 0 
+
+
+ Node: 4
+	Coordinates  : 900 0 0 
+
+
+ Node: 5
+	Coordinates  : 1200 0 0 
+
+
+ Node: 6
+	Coordinates  : 1500 0 0 
+
+
+ Node: 7
+	Coordinates  : 1800 0 0 
+
+
+ Node: 8
+	Coordinates  : 2100 0 0 
+
+
+ Node: 9
+	Coordinates  : 2400 0 0 
+
+
+ Node: 10
+	Coordinates  : 2700 0 0 
+
+
+ Node: 11
+	Coordinates  : 3000 0 0 
+
+
+ Node: 12
+	Coordinates  : 3300 0 0 
+
+
+ Node: 13
+	Coordinates  : 3600 0 0 
+
+
+ Node: 14
+	Coordinates  : 3900 0 0 
+
+
+ Node: 15
+	Coordinates  : 4200 0 0 
+
+
+ Node: 16
+	Coordinates  : 4500 0 0 
+
+
+ Node: 17
+	Coordinates  : 4800 0 0 
+
+
+ Node: 18
+	Coordinates  : 5100 0 0 
+
+
+ Node: 19
+	Coordinates  : 5400 0 0 
+
+
+ Node: 20
+	Coordinates  : 5700 0 0 
+
+
+ Node: 21
+	Coordinates  : 6000 0 0 
+
+
+ELEMENT DATA: NumEle: 0
+
+SP_Constraints: numConstraints: 7
+SP_Constraint: 8	 Node: 1 DOF: 1 ref value: 0 current value: 0
+SP_Constraint: 9	 Node: 1 DOF: 2 ref value: 0 current value: 0
+SP_Constraint: 10	 Node: 1 DOF: 3 ref value: 0 current value: 0
+SP_Constraint: 11	 Node: 11 DOF: 0 ref value: 0 current value: 0
+SP_Constraint: 12	 Node: 21 DOF: 1 ref value: 0 current value: 0
+SP_Constraint: 13	 Node: 21 DOF: 2 ref value: 0 current value: 0
+SP_Constraint: 14	 Node: 21 DOF: 3 ref value: 0 current value: 0
+
+MP_Constraints: numConstraints: 0
+
+LOAD PATTERNS: numPatterns: 0
+
+
+PARAMETERS: numParameters: 0
+
