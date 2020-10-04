@@ -43,7 +43,7 @@ set(gca,'YTick',(7:0.5:10))
 set(gca,'FontSize',10)
 xlabel('Z-displacement of point O','FontSize',10) 
 ylabel('Load P/10000','FontSize',10)
-legend({'Battini','DB4','DB8'},'FontSize',10)
+legend({'Battini and Pacoste [18]','DB4','DB8'},'FontSize',10)
 legend('Location','southeast')
 % save figure
 figWidth=3.5;

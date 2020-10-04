@@ -11,7 +11,7 @@ plot(TrahairL(:,1),TrahairL(:,2),'k--','LineWidth',1)
 plot(dispDispEndMxDB1(:,5),10000*dispDispEndMxDB1(:,1),'k-','LineWidth',1)
 plot(dispDispEndMx(:,5),10000*dispDispEndMx(:,1),'r--','LineWidth',1)
 
-legend({'Trahair-nonlinear','Trahair-linear','DB1','DB20'},'FontSize',10)
+legend({'Trahair [29]-nonlinear','Trahair [29]-linear','DB1','DB20'},'FontSize',10)
 legend('Location','northwest')
 xlim([0 1.4])
 ylim([0 14e6])

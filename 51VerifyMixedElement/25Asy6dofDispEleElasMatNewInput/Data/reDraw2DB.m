@@ -26,18 +26,18 @@ plot(-DispDB2(:,3)/0.0393701,15*DispDB2(:,1)/0.22,'r--','LineWidth',1)
 hold off
 % legend({'Battini-u','Battini-v','DB30-u','DB30-v','DB6-u','DB6-v','DB4-u','DB4-v',...
 %     'MB30-u','MB30-v','MB6-u','MB6-v','MB4-u','MB4-v'},'FontSize',4)
-legend({'Alsafadie-u','Alsafadie-v','DB3-u','DB3-v','DB2-u','DB2-v'},'FontSize',10)
-legend('Location','northwest')
+legend({'Alsafadie et al. [35]-u','Alsafadie et al. [35]-v','DB3-u','DB3-v','DB2-u','DB2-v'},'FontSize',10)
+legend('Location','southeast')
 xlim([0 1800])
-ylim([0 70])
-set(gca,'XTick',(0:300:1800),'YTick',(0:10:70))
+ylim([0 60])
+set(gca,'XTick',(0:300:1800),'YTick',(0:10:60))
 set(gca,'FontSize',10)
 xlabel('Displacements (mm)','FontSize',10) 
 ylabel('Load P (kN)','FontSize',10) 
 
 % save figure
-figWidth=3.5;
-figHeight=3;
+figWidth=4;
+figHeight=3.5;
 set(hfig,'PaperUnits','inches');
 set(hfig,'PaperPosition',[0 0 figWidth figHeight]);
 fileout=('test2DB.');
