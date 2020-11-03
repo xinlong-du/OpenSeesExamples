@@ -1,15 +1,18 @@
 clear;clc;
 DispMidFx=load('DispMidFxImperf.out');
 mixedDispMidFx=load('mixedDispMidFxImperf.out');
+mixedDispMidFxMB2=load('mixedDispMidFxImperfMB2.out');
 % Battini = csvread('Battini.csv');
 %% plot u and v vs. lateral force
 hfig=figure;
-plot(DispMidFx(:,5),DispMidFx(:,1),'k-','LineWidth',1)
+plot([0 0.6],[258 258],'r--','LineWidth',1)
+% plot(DispMidFx(:,5),DispMidFx(:,1),'k-','LineWidth',1)
 hold on
-plot(mixedDispMidFx(:,5),mixedDispMidFx(:,1),'r--','LineWidth',1)
+% plot(mixedDispMidFx(:,5),mixedDispMidFx(:,1),'r--','LineWidth',1)
+plot(mixedDispMidFxMB2(:,5),mixedDispMidFxMB2(:,1),'k-','LineWidth',1)
 % plot(Battini(:,1),Battini(:,2),'ko','LineWidth',1)
-plot([0 0.6],[258 258],'b-.','LineWidth',1)
-legend({'DB20','MB20','Theoretical'},'FontSize',10)
+legend({'Theoretical','MB2'},'FontSize',10)
+% legend({'DB20','MB20','MB2','Theoretical'},'FontSize',10)
 legend('Location','northwest')
 xlabel('Twist rotation of the midpoint','FontSize',10) 
 ylabel('Applied load','FontSize',10)

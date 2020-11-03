@@ -31,11 +31,11 @@ plot(mixedDispEnd8Layer10ele(11:14000,4),mixedDispEnd8Layer10ele(11:14000,1),'r-
 plot(mixedDispEnd8Layer20ele(11:14000,4),mixedDispEnd8Layer20ele(11:14000,1),'r--','LineWidth',1)
 plot(mixedDispEnd8Layer40ele(11:14000,4),mixedDispEnd8Layer40ele(11:14000,1),'r-.','LineWidth',1)
 
-plot(AlemDisp(:,1),AlemDisp(:,2),'kd','LineWidth',1)
-plot(Crisfield(:,1),Crisfield(:,2),'ks','LineWidth',1)
-plot(Simo(:,1),Simo(:,2),'ko','LineWidth',1)
+plot(AlemDisp(:,1),AlemDisp(:,2),'ko','LineWidth',1)
+% plot(Crisfield(:,1),Crisfield(:,2),'kd','LineWidth',1)
+plot(Simo(:,1),Simo(:,2),'ks','LineWidth',1)
 legend({'DB10','DB20','DB40',...
-    'MB10','MB20','MB40','Alemdar','Crisfield','Simo'},'FontSize',10)
+    'MB10','MB20','MB40','Alemdar','Simo'},'FontSize',10)
 legend('Location','southeast')
 xlim([0 70])
 ylim([0.5 1.5])

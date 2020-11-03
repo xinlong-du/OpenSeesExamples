@@ -5,6 +5,9 @@ DispDB6=load('CantileverDispModifyFiber2layerDB6.out');
 mixedDisp=load('mixedCantileverDispModifyFiber2layer.out');
 mixedDispMB4=load('mixedCantileverDispModifyFiber2layerMB4.out');
 mixedDispMB6=load('mixedCantileverDispModifyFiber2layerMB6.out');
+mixedDispMB6GP2=load('mixedCantileverDispModifyFiber2layerMB6GP2.out');
+mixedDispMB6GP9=load('mixedCantileverDispModifyFiber2layerMB6GP9.out');
+mixedDispMB4GP2=load('mixedCantileverDispModifyFiber2layerMB4GP2.out');
 B_u = csvread('Battini_u.csv');
 B_v = csvread('Battini_v.csv');
 B_w = csvread('Battini_w.csv');
@@ -13,25 +16,19 @@ hfig=figure;
 plot(0.0393701*B_u(:,1),0.22*B_u(:,2),'ko','LineWidth',1)
 hold on
 plot(0.0393701*B_v(:,1),0.22*B_v(:,2),'ks','LineWidth',1)
-% plot(-Disp(1:13189,2),15*Disp(1:13189,1),'k-','LineWidth',1)
-% plot(-Disp(1:13189,3),15*Disp(1:13189,1),'k--','LineWidth',1)
 plot(-DispDB6(:,2),15*DispDB6(:,1),'k-','LineWidth',1)
 plot(-DispDB6(:,3),15*DispDB6(:,1),'k--','LineWidth',1)
-% plot(-DispDB4(:,2),15*DispDB4(:,1),'m-.','LineWidth',1)
-% plot(-DispDB4(:,3),15*DispDB4(:,1),'m:','LineWidth',1)
-
-% plot(-mixedDisp(1:12189,2),15*mixedDisp(1:12189,1),'r-','LineWidth',1)
-% plot(-mixedDisp(1:12189,3),15*mixedDisp(1:12189,1),'r--','LineWidth',1)
 plot(-mixedDispMB6(:,2),15*mixedDispMB6(:,1),'r-','LineWidth',1)
 plot(-mixedDispMB6(:,3),15*mixedDispMB6(:,1),'r--','LineWidth',1)
-% plot(-mixedDispMB4(:,2),15*mixedDispMB4(:,1),'b-','LineWidth',1)
-% plot(-mixedDispMB4(:,3),15*mixedDispMB4(:,1),'b--','LineWidth',1)
-
+plot(-mixedDispMB6GP2(:,2),15*mixedDispMB6GP2(:,1),'b-','LineWidth',1)
+plot(-mixedDispMB6GP2(:,3),15*mixedDispMB6GP2(:,1),'b--','LineWidth',1)
+% plot(-mixedDispMB6GP9(:,2),15*mixedDispMB6GP9(:,1),'m-','LineWidth',1)
+% plot(-mixedDispMB6GP9(:,3),15*mixedDispMB6GP9(:,1),'m--','LineWidth',1)
+plot(-mixedDispMB4GP2(:,2),15*mixedDispMB4GP2(:,1),'g-','LineWidth',1)
+plot(-mixedDispMB4GP2(:,3),15*mixedDispMB4GP2(:,1),'g--','LineWidth',1)
 hold off
-% legend({'Battini-u','Battini-v','DB30-u','DB30-v','DB6-u','DB6-v','DB4-u','DB4-v',...
-%     'MB30-u','MB30-v','MB6-u','MB6-v','MB4-u','MB4-v'},'FontSize',4)
 legend({'Alsafadie-u','Alsafadie-v','DB6-u','DB6-v',...
-    'MB6-u','MB6-v'},'FontSize',10)
+    'MB6-u','MB6-v','MB6GP2-u','MB6GP2-v','MB4GP2-u','MB4GP2-v'},'FontSize',6)
 legend('Location','northwest')
 xlim([0 70])
 ylim([0 16])
