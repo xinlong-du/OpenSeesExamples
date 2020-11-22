@@ -1,7 +1,7 @@
 clear;clc;
 DispMidFx=load('DispMidFxImperf.out');
 mixedDispMidFx=load('mixedDispMidFxImperf.out');
-mixedDispMidFxMB2=load('mixedDispMidFxImperfMB2.out');
+mixedDispMidFxMB2=load('mixedDispMidFxImperfMB2Coarse.out');
 % Battini = csvread('Battini.csv');
 %% plot u and v vs. lateral force
 hfig=figure;
