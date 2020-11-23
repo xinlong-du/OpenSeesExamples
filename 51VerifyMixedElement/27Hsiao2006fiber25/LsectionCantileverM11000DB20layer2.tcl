@@ -14,7 +14,7 @@ source DisplayModel3D.tcl;		# procedure for displaying 3D perspectives of model
 # define GEOMETRY ------------------------------------------------------------------
 #Nodes, NodeNumber, xCoord, yCoord, zCoord
 for {set i 1} {$i<22} {incr i 1} {
-	node $i [expr -450.0+450.0*$i] 0 0;
+	node $i [expr -46.736+46.736*$i] 0 0;
 }
 # ------ define boundary conditions
 # NodeID,dispX,dispY,dispZ,rotX,RotY,RotZ   
@@ -22,23 +22,27 @@ set StartNode 1;
 set MiddleNode 11;
 set EndNode 21;
 fix $StartNode 1 1 1 1 0 0;
-fix $EndNode 0 1 1 1 0 0;
+fix $EndNode   0 1 1 1 0 0;
 # Define  SECTIONS -------------------------------------------------------------
 # define section tags:
 set ColSecTag 1
+#set ColSecTagFiber 4
+#set SecTagTorsion 70
 	# define MATERIAL properties 
-	set Es 200000.0;		# Steel Young's Modulus
-	set Gs 80000.0;  # Torsional stiffness Modulus
+	set Es 68950.0;		# Steel Young's Modulus
+	set nu 0.3;
+	set Gs 25856.25;  # Torsional stiffness Modulus
 	set matID 1;
 	uniaxialMaterial Elastic $matID $Es;
 	# ELEMENT properties
 	# beam-column sections: L5x3.5x5/16
-	set J 71960.0;
-	set GJ [expr $Gs*$J];
-	set y0 0.0;
-	set z0 -84.55;
+	set J 8.21896013;
+	set GJ [expr $Gs*$J]
+	set y0 -8.83839645;
+	set z0 0.00000000;
 	
-source TSecCoarse.tcl;
+source Lsection2layer.tcl
+	#set oC 0.0;
 	# assign torsional Stiffness for 3D Model
 	#uniaxialMaterial Elastic $SecTagTorsion $GJ
 	#section Aggregator $ColSecTag $SecTagTorsion T -section $ColSecTagFiber
@@ -53,12 +57,11 @@ for {set i 1} {$i<$EndNode} {incr i 1} {
 set elemID $i
 set nodeI $i
 set nodeJ [expr $i+1]
-element mixedBeamColumn $elemID $nodeI $nodeJ $numIntgrPts $ColSecTag $IDColTransf -shearCenter $y0 $z0;	
+element dispBeamColumn $elemID $nodeI $nodeJ $numIntgrPts $ColSecTag $IDColTransf $y0 $z0;	
 } 
 
 # Define RECORDERS -------------------------------------------------------------
-recorder Node -file $dataDir/mixedMcrLTBDispEnd9mDB20Fy5.out -time -node $EndNode -dof 1 2 3 4 5 6 disp;			# displacements of end node
-recorder Node -file $dataDir/mixedMcrLTBDispMid9mDB20Fy5.out -time -node $MiddleNode -dof 1 2 3 4 5 6 disp;			# displacements of middle node
+recorder Node -file $dataDir/CantileverDispM11000DB20layer2.out -time -node $MiddleNode -dof 1 2 3 4 5 6 disp;			# displacements of middle node
 #recorder Node -file $dataDir/CantileverReac.out -time -node $StartNode -dof 1 2 3 4 5 6 reaction;		# support reaction
 
 # Define DISPLAY -------------------------------------------------------------
@@ -66,10 +69,11 @@ DisplayModel3D DeformedShape;	 # options: DeformedShape NodeNumbers ModeShape
 
 # define initial Moment
 #-------------------------------------------------------------
-set F 5.0;
+set M 11000.0; 
 pattern Plain 1 Linear {
   # NodeID, Fx, Fy, Fz, Mx, My, Mz
-  load $MiddleNode   0 $F 0 0 0 0;
+  load $StartNode 0 0 0 0 $M 0;
+  load $EndNode   0 0 0 0 -$M 0;
   }
 constraints Plain;  # Constraint handler -how it handles boundary conditions
 numberer Plain;	    # Renumbers DoF to minimize band-width (optimization)
@@ -77,19 +81,18 @@ system BandGeneral; # System of equations solver
 #test NormUnbalance 1.0e-10 20 1; # tol maxNumIter printFlag
 test NormDispIncr 1.0e-8 50 0;
 algorithm Newton;# use Newton's solution algorithm: updates tangent stiffness at every iteration
-integrator LoadControl 0.1;
+integrator LoadControl 0.01;
 analysis Static; 
-analyze 10; 
+analyze 100; 
 
 loadConst -time 0.0; # maintains the load constant for the reminder of the analysis and resets the current time to 0
- 
+
 # define second stage main Load (Axial force at the two ends)
-#-------------------------------------------------------------
-set M 1000000.0 
+#------------------------------------------------------------- 
+set N 400.0;
 pattern Plain 2 Linear {
   # NodeID, Fx, Fy, Fz, Mx, My, Mz
-  load $StartNode 0 0 0 0 -$M 0;
-  load $EndNode 0 0 0 0 $M 0; 
+  load $MiddleNode 0 0 0 $N 0 0; 
  }
 
 # define ANALYSIS PARAMETERS
@@ -100,13 +103,14 @@ system BandGeneral;# how to store and solve the system of equations in the analy
 test NormDispIncr 1.0e-08 1000; # determine if convergence has been achieved at the end of an iteration step
 #algorithm NewtonLineSearch;# use Newton's solution algorithm: updates tangent stiffness at every iteration
 algorithm Newton;
-integrator LoadControl 0.02;
-#set Dincr 0.005; #-0.00002
+set Dincr 0.001; #-0.00002
+#integrator LoadControl 0.0001
 #integrator ArcLength 0.05 1.0; #arclength alpha
-                                #Node,  dof, 1st incr, Jd, min,   max
-#integrator DisplacementControl $EndNode 3   $Dincr     1  $Dincr 0.005;
+                                  #Node,  dof, 1st incr, Jd, min,   max
+integrator DisplacementControl $MiddleNode 4   $Dincr     1  $Dincr 0.001;
 analysis Static	;# define type of analysis static or transient
-analyze 4000;
+variable algorithmTypeStatic Newton
+set ok [analyze 500];
 puts "Finished"
 #--------------------------------------------------------------------------------
 #set finishTime [clock clicks -milliseconds];

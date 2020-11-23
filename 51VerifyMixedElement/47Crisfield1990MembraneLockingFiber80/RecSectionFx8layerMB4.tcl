@@ -13,32 +13,34 @@ source DisplayPlane.tcl;		# procedure for displaying a plane in model
 source DisplayModel3D.tcl;		# procedure for displaying 3D perspectives of model
 # define GEOMETRY ------------------------------------------------------------------
 #Nodes, NodeNumber, xCoord, yCoord, zCoord
-for {set i 1} {$i<22} {incr i 1} {
-	node $i [expr -450.0+450.0*$i] 0 0;
-}
+node 1	0.00	0	    0
+node 2  120.0   0       0
+node 3	240.0   0	    0
+node 4	240.0	-120.0	0
+node 5	240.0	-240.0	0
 # ------ define boundary conditions
 # NodeID,dispX,dispY,dispZ,rotX,RotY,RotZ   
 set StartNode 1;
-set MiddleNode 11;
-set EndNode 21;
-fix $StartNode 1 1 1 1 0 0;
-fix $EndNode 0 1 1 1 0 0;
+set MiddleNode 3;
+set EndNode 5;
+fix $StartNode 1 1 1 1 1 1;
 # Define  SECTIONS -------------------------------------------------------------
 # define section tags:
 set ColSecTag 1
 	# define MATERIAL properties 
-	set Es 200000.0;		# Steel Young's Modulus
-	set Gs 80000.0;  # Torsional stiffness Modulus
+	set Es 71240;		# Steel Young's Modulus
+	set nu 0.31;
+	set Gs [expr $Es/2./[expr 1+$nu]];  # Torsional stiffness Modulus
 	set matID 1;
 	uniaxialMaterial Elastic $matID $Es;
 	# ELEMENT properties
 	# beam-column sections: L5x3.5x5/16
-	set J 71960.0;
+	set J 2.16;
 	set GJ [expr $Gs*$J];
 	set y0 0.0;
-	set z0 -84.55;
+	set z0 0.0;
 	
-source TSecCoarse.tcl;
+source RecSection8Layer.tcl;
 	# assign torsional Stiffness for 3D Model
 	#uniaxialMaterial Elastic $SecTagTorsion $GJ
 	#section Aggregator $ColSecTag $SecTagTorsion T -section $ColSecTagFiber
@@ -57,8 +59,8 @@ element mixedBeamColumn $elemID $nodeI $nodeJ $numIntgrPts $ColSecTag $IDColTran
 } 
 
 # Define RECORDERS -------------------------------------------------------------
-recorder Node -file $dataDir/mixedMcrLTBDispEnd9mDB20Fy5.out -time -node $EndNode -dof 1 2 3 4 5 6 disp;			# displacements of end node
-recorder Node -file $dataDir/mixedMcrLTBDispMid9mDB20Fy5.out -time -node $MiddleNode -dof 1 2 3 4 5 6 disp;			# displacements of middle node
+recorder Node -file $dataDir/mixedDispEnd8Layer4ele.out -time -node $EndNode -dof 1 2 3 4 5 6 disp;			# displacements of end node
+recorder Node -file $dataDir/mixedDispMid8Layer4ele.out -time -node $MiddleNode -dof 1 2 3 4 5 6 disp;			# displacements of middle node
 #recorder Node -file $dataDir/CantileverReac.out -time -node $StartNode -dof 1 2 3 4 5 6 reaction;		# support reaction
 
 # Define DISPLAY -------------------------------------------------------------
@@ -66,10 +68,10 @@ DisplayModel3D DeformedShape;	 # options: DeformedShape NodeNumbers ModeShape
 
 # define initial Moment
 #-------------------------------------------------------------
-set F 5.0;
+set F 2e-4; 
 pattern Plain 1 Linear {
   # NodeID, Fx, Fy, Fz, Mx, My, Mz
-  load $MiddleNode   0 $F 0 0 0 0;
+  load $EndNode   0 0 $F 0 0 0;
   }
 constraints Plain;  # Constraint handler -how it handles boundary conditions
 numberer Plain;	    # Renumbers DoF to minimize band-width (optimization)
@@ -82,14 +84,13 @@ analysis Static;
 analyze 10; 
 
 loadConst -time 0.0; # maintains the load constant for the reminder of the analysis and resets the current time to 0
- 
+
 # define second stage main Load (Axial force at the two ends)
-#-------------------------------------------------------------
-set M 1000000.0 
+#------------------------------------------------------------- 
+set N 1.0;
 pattern Plain 2 Linear {
   # NodeID, Fx, Fy, Fz, Mx, My, Mz
-  load $StartNode 0 0 0 0 -$M 0;
-  load $EndNode 0 0 0 0 $M 0; 
+  load $EndNode $N 0 0 0 0 0; 
  }
 
 # define ANALYSIS PARAMETERS
@@ -100,13 +101,13 @@ system BandGeneral;# how to store and solve the system of equations in the analy
 test NormDispIncr 1.0e-08 1000; # determine if convergence has been achieved at the end of an iteration step
 #algorithm NewtonLineSearch;# use Newton's solution algorithm: updates tangent stiffness at every iteration
 algorithm Newton;
-integrator LoadControl 0.02;
-#set Dincr 0.005; #-0.00002
+set Dincr 0.005; #-0.00002
+integrator LoadControl 0.0001
 #integrator ArcLength 0.05 1.0; #arclength alpha
                                 #Node,  dof, 1st incr, Jd, min,   max
 #integrator DisplacementControl $EndNode 3   $Dincr     1  $Dincr 0.005;
 analysis Static	;# define type of analysis static or transient
-analyze 4000;
+analyze 15000;
 puts "Finished"
 #--------------------------------------------------------------------------------
 #set finishTime [clock clicks -milliseconds];

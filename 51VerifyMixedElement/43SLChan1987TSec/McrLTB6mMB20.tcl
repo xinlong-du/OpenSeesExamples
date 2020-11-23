@@ -14,7 +14,7 @@ source DisplayModel3D.tcl;		# procedure for displaying 3D perspectives of model
 # define GEOMETRY ------------------------------------------------------------------
 #Nodes, NodeNumber, xCoord, yCoord, zCoord
 for {set i 1} {$i<22} {incr i 1} {
-	node $i [expr -450.0+450.0*$i] 0 0;
+	node $i [expr -300.0+300.0*$i] 0 0;
 }
 # ------ define boundary conditions
 # NodeID,dispX,dispY,dispZ,rotX,RotY,RotZ   
@@ -57,8 +57,8 @@ element mixedBeamColumn $elemID $nodeI $nodeJ $numIntgrPts $ColSecTag $IDColTran
 } 
 
 # Define RECORDERS -------------------------------------------------------------
-recorder Node -file $dataDir/mixedMcrLTBDispEnd9mDB20Fy5.out -time -node $EndNode -dof 1 2 3 4 5 6 disp;			# displacements of end node
-recorder Node -file $dataDir/mixedMcrLTBDispMid9mDB20Fy5.out -time -node $MiddleNode -dof 1 2 3 4 5 6 disp;			# displacements of middle node
+recorder Node -file $dataDir/mixedMcrLTBDispEnd6mDB2Fy5.out -time -node $EndNode -dof 1 2 3 4 5 6 disp;			# displacements of end node
+recorder Node -file $dataDir/mixedMcrLTBDispMid6mDB2Fy5.out -time -node $MiddleNode -dof 1 2 3 4 5 6 disp;			# displacements of middle node
 #recorder Node -file $dataDir/CantileverReac.out -time -node $StartNode -dof 1 2 3 4 5 6 reaction;		# support reaction
 
 # Define DISPLAY -------------------------------------------------------------
@@ -106,7 +106,7 @@ integrator LoadControl 0.02;
                                 #Node,  dof, 1st incr, Jd, min,   max
 #integrator DisplacementControl $EndNode 3   $Dincr     1  $Dincr 0.005;
 analysis Static	;# define type of analysis static or transient
-analyze 4000;
+analyze 5000;
 puts "Finished"
 #--------------------------------------------------------------------------------
 #set finishTime [clock clicks -milliseconds];

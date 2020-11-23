@@ -13,32 +13,33 @@ source DisplayPlane.tcl;		# procedure for displaying a plane in model
 source DisplayModel3D.tcl;		# procedure for displaying 3D perspectives of model
 # define GEOMETRY ------------------------------------------------------------------
 #Nodes, NodeNumber, xCoord, yCoord, zCoord
-for {set i 1} {$i<22} {incr i 1} {
-	node $i [expr -450.0+450.0*$i] 0 0;
+for {set i 1} {$i<32} {incr i 1} {
+	node $i [expr -100.0+100.0*$i] 0 0;
 }
 # ------ define boundary conditions
 # NodeID,dispX,dispY,dispZ,rotX,RotY,RotZ   
 set StartNode 1;
-set MiddleNode 11;
-set EndNode 21;
+set MiddleNode 16;
+set EndNode 31;
 fix $StartNode 1 1 1 1 0 0;
 fix $EndNode 0 1 1 1 0 0;
 # Define  SECTIONS -------------------------------------------------------------
 # define section tags:
 set ColSecTag 1
 	# define MATERIAL properties 
-	set Es 200000.0;		# Steel Young's Modulus
-	set Gs 80000.0;  # Torsional stiffness Modulus
+	set Es 70000;		# Steel Young's Modulus
+	set nu 0.33;
+	set Gs [expr $Es/(2*(1+$nu))];  # Torsional stiffness Modulus
 	set matID 1;
 	uniaxialMaterial Elastic $matID $Es;
 	# ELEMENT properties
 	# beam-column sections: L5x3.5x5/16
-	set J 71960.0;
+	set J 8424.0;
 	set GJ [expr $Gs*$J];
 	set y0 0.0;
-	set z0 -84.55;
+	set z0 -14.21;
 	
-source TSecCoarse.tcl;
+source TSec.tcl
 	# assign torsional Stiffness for 3D Model
 	#uniaxialMaterial Elastic $SecTagTorsion $GJ
 	#section Aggregator $ColSecTag $SecTagTorsion T -section $ColSecTagFiber
@@ -53,12 +54,12 @@ for {set i 1} {$i<$EndNode} {incr i 1} {
 set elemID $i
 set nodeI $i
 set nodeJ [expr $i+1]
-element mixedBeamColumn $elemID $nodeI $nodeJ $numIntgrPts $ColSecTag $IDColTransf -shearCenter $y0 $z0;	
+element dispBeamColumn $elemID $nodeI $nodeJ $numIntgrPts $ColSecTag $IDColTransf $y0 $z0;	
 } 
 
 # Define RECORDERS -------------------------------------------------------------
-recorder Node -file $dataDir/mixedMcrLTBDispEnd9mDB20Fy5.out -time -node $EndNode -dof 1 2 3 4 5 6 disp;			# displacements of end node
-recorder Node -file $dataDir/mixedMcrLTBDispMid9mDB20Fy5.out -time -node $MiddleNode -dof 1 2 3 4 5 6 disp;			# displacements of middle node
+recorder Node -file $dataDir/McrLTBDispEndL3000DB30.out -time -node $EndNode -dof 1 2 3 4 5 6 disp;			# displacements of end node
+recorder Node -file $dataDir/McrLTBDispMidL3000DB30.out -time -node $MiddleNode -dof 1 2 3 4 5 6 disp;			# displacements of middle node
 #recorder Node -file $dataDir/CantileverReac.out -time -node $StartNode -dof 1 2 3 4 5 6 reaction;		# support reaction
 
 # Define DISPLAY -------------------------------------------------------------
@@ -100,13 +101,13 @@ system BandGeneral;# how to store and solve the system of equations in the analy
 test NormDispIncr 1.0e-08 1000; # determine if convergence has been achieved at the end of an iteration step
 #algorithm NewtonLineSearch;# use Newton's solution algorithm: updates tangent stiffness at every iteration
 algorithm Newton;
-integrator LoadControl 0.02;
+integrator LoadControl 0.0025;
 #set Dincr 0.005; #-0.00002
 #integrator ArcLength 0.05 1.0; #arclength alpha
                                 #Node,  dof, 1st incr, Jd, min,   max
 #integrator DisplacementControl $EndNode 3   $Dincr     1  $Dincr 0.005;
 analysis Static	;# define type of analysis static or transient
-analyze 4000;
+analyze 2000;
 puts "Finished"
 #--------------------------------------------------------------------------------
 #set finishTime [clock clicks -milliseconds];

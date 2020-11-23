@@ -38,7 +38,7 @@ set ColSecTag 1
 	set y0 0.0;
 	set z0 -84.55;
 	
-source TSec.tcl
+source TSecCoarse.tcl;
 	# assign torsional Stiffness for 3D Model
 	#uniaxialMaterial Elastic $SecTagTorsion $GJ
 	#section Aggregator $ColSecTag $SecTagTorsion T -section $ColSecTagFiber
