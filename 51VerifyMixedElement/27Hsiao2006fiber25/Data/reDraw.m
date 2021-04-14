@@ -89,7 +89,7 @@ plot(mixedDispM9780DB20layer2t0794(101:end,5),400*mixedDispM9780DB20layer2t0794(
 plot(mixedDispM9780DB20layer2t0794M(101:end,5),-400*mixedDispM9780DB20layer2t0794M(101:end,1)+1000,'k-','LineWidth',1)
 plot(mixedDispM11000DB20layer2t0794(101:end,5),400*mixedDispM11000DB20layer2t0794(101:end,1)+800,'k-','LineWidth',1)
 plot(mixedDispM11000DB20layer2t0794M(101:end,5),-400*mixedDispM11000DB20layer2t0794M(101:end,1)+800,'k-','LineWidth',1)
-legend([h1 h3],{'Engel (exp.)','MB20'},'FontSize',10)
+legend([h1 h3],{'Engel and Goodier','MB20'},'FontSize',10)
 % legend([h1 h2 h3],{'Engel (exp.)','DB20','MB20'},'FontSize',10)
 legend('Location','southeast')
 xlabel('Twist (rad)','FontSize',10) 

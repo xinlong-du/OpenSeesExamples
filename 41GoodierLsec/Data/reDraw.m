@@ -24,7 +24,7 @@ plot(903.88/2/112.98*DispM3231ele20(11:end,1),DispM3231ele20(11:end,5)/18.4,'k-'
 plot(903.88/2/112.98*DispM4338ele20(11:end,1),DispM4338ele20(11:end,5)/18.4,'k-','LineWidth',1)
 plot(903.88/2/112.98*DispM5445ele20(11:end,1),DispM5445ele20(11:end,5)/18.4,'k-','LineWidth',1)
 %plot(903.88/2/112.98*DispM5445Negele20(11:end,1),DispM5445Negele20(11:end,5)/18.4,'*')
-legend({'Engel and Goodier [32]','DB20'},'FontSize',10);
+legend({'Engel and Goodier [48]','DB20'},'FontSize',10);
 legend('Location','southeast')
 xlim([0 4.0])
 ylim([0 0.03])

@@ -23,8 +23,8 @@ plot(DispEnd4LayerFz(1:15000,4),DispEnd4LayerFz(1:15000,1),'k--','LineWidth',2)
 plot(DispEnd8LayerFz20ele(1:15000,4),DispEnd8LayerFz20ele(1:15000,1),'k:','LineWidth',1)
 plot(DispEnd8LayerFz40ele(1:15000,4),DispEnd8LayerFz40ele(1:15000,1),'k--','LineWidth',1)
 
-legend('DB5-original element','DB40-original element',...
-    'DB5-with locking','DB20-with locking','DB40-with locking')
+legend({'DB5-original element','DB40-original element',...
+    'DB5-with locking','DB20-with locking','DB40-with locking'},'FontSize',10)
 legend('Location','west')
 xlim([0 250])
 ylim([0 100])

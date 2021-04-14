@@ -31,12 +31,14 @@ hfig=figure;
 plot(FTBInElasl(:,1),FTBInElasl(:,2),'ko','LineWidth',0.5)
 hold on
 % plot(FTBInElasDispMidF0001PDB2(:,3),FTBInElasDispMidF0001PDB2(:,1),'b-','LineWidth',0.5)
-plot(FTBInElasDispMidF0001PDB4(:,3),FTBInElasDispMidF0001PDB4(:,1),'k--','LineWidth',1)
-plot(FTBInElasDispMidF0001PDB8(:,3),FTBInElasDispMidF0001PDB8(:,1),'k-','LineWidth',1)
+plot(FTBInElasDispMidF0001PDB4(:,3),FTBInElasDispMidF0001PDB4(:,1),'k--','LineWidth',0.8)
+plot(FTBInElasDispMidF0001PDB8(:,3),FTBInElasDispMidF0001PDB8(:,1),'k-','Marker','.',...
+    'MarkerSize',12,'MarkerIndices',(1:80:2500),'LineWidth',0.8)
 % plot(FTBInElasDispMidF0001PDB40(:,3),FTBInElasDispMidF0001PDB40(:,1),'k-','LineWidth',0.5)
 % plot(mixedFTBInElasDispMidF0001PMB2(:,3),mixedFTBInElasDispMidF0001PMB2(:,1),'r-','LineWidth',0.5)
-plot(mixedFTBInElasDispMidF0001PMB4(:,3),mixedFTBInElasDispMidF0001PMB4(:,1),'r--','LineWidth',1)
-plot(mixedFTBInElasDispMidF0001PMB8(:,3),mixedFTBInElasDispMidF0001PMB8(:,1),'r-','LineWidth',1)
+plot(mixedFTBInElasDispMidF0001PMB4(:,3),mixedFTBInElasDispMidF0001PMB4(:,1),'k-.','LineWidth',0.8)
+plot(mixedFTBInElasDispMidF0001PMB8(:,3),mixedFTBInElasDispMidF0001PMB8(:,1),'k:','Marker','x',...
+    'MarkerSize',5,'MarkerIndices',(40:80:2500),'LineWidth',0.8)
 % plot(mixedFTBInElasDispMidF0001PMB40(:,3),mixedFTBInElasDispMidF0001PMB40(:,1),'r--','LineWidth',0.5)
 
 xlim([0 60])
@@ -46,7 +48,7 @@ set(gca,'YTick',(1:0.2:2.8))
 set(gca,'FontSize',10)
 xlabel('Z-displacement of point O','FontSize',10) 
 ylabel('Load P/10000','FontSize',10)
-legend({'Battini','DB4','DB8','MB4','MB8'},'FontSize',10)
+legend({'Battini and Pacoste','DB4','DB8','MB4','MB8'},'FontSize',10)
 legend('Location','southeast')
 % save figure
 figWidth=3.5;

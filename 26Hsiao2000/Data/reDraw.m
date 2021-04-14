@@ -11,7 +11,7 @@ plot(Disp2layer(1:13090,4),Disp2layer(1:13090,3),'k-','LineWidth',1)
 hold on
 plot(Exp(1:6,1),Exp(1:6,2),'ko','LineWidth',1)
 plot(Num(:,1),Num(:,2),'ks','LineWidth',1)
-legend({'DB20','Gregory [31]','Hsiao and Lin [15]'},'FontSize',10)
+legend({'DB20','Gregory [47]','Hsiao and Lin [29]'},'FontSize',10)
 legend('Location','northwest')
 xlabel('Y (mm)','FontSize',10) 
 ylabel('Z (mm)','FontSize',10)

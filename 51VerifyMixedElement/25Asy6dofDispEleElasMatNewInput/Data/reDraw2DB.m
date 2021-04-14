@@ -26,7 +26,7 @@ plot(-DispDB2(:,3)/0.0393701,15*DispDB2(:,1)/0.22,'r--','LineWidth',1)
 hold off
 % legend({'Battini-u','Battini-v','DB30-u','DB30-v','DB6-u','DB6-v','DB4-u','DB4-v',...
 %     'MB30-u','MB30-v','MB6-u','MB6-v','MB4-u','MB4-v'},'FontSize',4)
-legend({'Alsafadie et al. [35]-u','Alsafadie et al. [35]-v','DB3-u','DB3-v','DB2-u','DB2-v'},'FontSize',10)
+legend({'Alsafadie et al. [51]-u','Alsafadie et al. [51]-v','DB3-u','DB3-v','DB2-u','DB2-v'},'FontSize',10)
 legend('Location','southeast')
 xlim([0 1800])
 ylim([0 60])

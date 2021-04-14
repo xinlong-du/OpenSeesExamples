@@ -13,7 +13,7 @@ set(gca,'XTick',(0:0.4:2.0))
 set(gca,'FontSize',10)
 xlabel('Modified Slenderness','FontSize',10) 
 ylabel('Buckling Load, Pc/Py','FontSize',10)
-legend({'DB20','Kitipornchai and Lee [33]'},'FontSize',10)
+legend({'DB20','Kitipornchai and Lee [49]'},'FontSize',10)
 legend('Location','northeast')
 
 % save figure

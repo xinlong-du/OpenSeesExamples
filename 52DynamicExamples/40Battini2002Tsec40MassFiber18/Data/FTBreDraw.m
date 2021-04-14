@@ -62,12 +62,12 @@ legend({'Battini','Abaqus solid','DB40','DB80','MB40'},'FontSize',10)
 legend('Location','southwest')
 %% save Uz
 hfig=figure;
-plot(uzAba(:,1),uzAba(:,2),'k-','LineWidth',1)
+plot(uzAba(:,1),uzAba(:,2),'k-','LineWidth',0.8)
 hold on
-plot(uzAbaBeam(:,1),uzAbaBeam(:,2),'g-.','LineWidth',1)
-plot(uz(:,1),uz(:,2),'b:','LineWidth',1)
+plot(uzAbaBeam(:,1),uzAbaBeam(:,2),'k-.','LineWidth',0.8)
+plot(uz(:,1),uz(:,2),'k:','LineWidth',0.8)
 % plot(DB40(:,1),DB40(:,4),'b--','LineWidth',1)
-plot(MB40(:,1),MB40(:,4),'r--','LineWidth',1)
+plot(MB40(:,1),MB40(:,4),'k--','LineWidth',0.8)
 
 xlabel('t (s)','FontSize',10) 
 ylabel('Displacement Uz (m)','FontSize',10)
