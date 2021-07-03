@@ -36,3 +36,23 @@
 *.csv
 
 *.jpg
+
+53Parallel/40Battini2002TSecOpenSeesMP/Data/
+
+55Database/OpenSees3.3.0/OpenSeesMP/40Battini2002Tsec40MassFiber18/Data/
+
+55Database/OpenSees3.3.0/Xinlong1dispElePureBending/db/
+
+55Database/OpenSeesPy/25CantileverLsec/db/
+
+55Database/OpenSeesPy/1ScottExample/db/
+
+*.gz
+
+55Database/OpenSees3.3.0/40Battini2002Tsec40MassFiber18/db/
+
+55Database/OpenSees3.3.0/40Battini2002TSec/db/
+
+55Database/OpenSees3.0.0/25CantileverLsec/db/
+
+53Parallel/25CantileverLsecOpenSeesMP/Data/
