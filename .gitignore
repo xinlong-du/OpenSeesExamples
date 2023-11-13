@@ -56,3 +56,5 @@
 55Database/OpenSees3.0.0/25CantileverLsec/db/
 
 53Parallel/25CantileverLsecOpenSeesMP/Data/
+
+*.pyd

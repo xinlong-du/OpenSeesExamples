@@ -66,7 +66,7 @@ plot(uzAba(:,1),uzAba(:,2),'k-','LineWidth',1)
 hold on
 plot(uzAbaBeam(:,1),uzAbaBeam(:,2),'g-.','LineWidth',1)
 plot(uz(:,1),uz(:,2),'b:','LineWidth',1)
-% plot(DB40(:,1),DB40(:,4),'b--','LineWidth',1)
+plot(DB40(:,1),DB40(:,4),'b--','LineWidth',1)
 plot(MB40(:,1),MB40(:,4),'r--','LineWidth',1)
 
 xlabel('t (s)','FontSize',10) 
@@ -76,13 +76,13 @@ ylim([-0.5 0.9])
 set(gca,'XTick',(0:0.5:2))
 set(gca,'YTick',(-0.5:0.2:0.9))
 % grid on
-legend({'Abaqus solid element','Abaqus beam element','Le et al.','MB40'},'FontSize',10)
+legend({'Abaqus solid element','Abaqus beam element','Le et al.','DB40','MB40'},'FontSize',10)
 % legend({'Battini','Abaqus solid','DB40','MB40'},'FontSize',10)
 legend('Location','southwest')
 
 % save figure
 figWidth=4.5;
-figHeight=3.5;
+figHeight=4.0;
 set(hfig,'PaperUnits','inches');
 set(hfig,'PaperPosition',[0 0 figWidth figHeight]);
 fileout=('test4.');

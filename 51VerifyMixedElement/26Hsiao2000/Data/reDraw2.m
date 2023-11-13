@@ -14,10 +14,10 @@ hold on
 plot(mixedDisp2layerMB20(1:13090,4),mixedDisp2layerMB20(1:13090,3),'r--','LineWidth',1)
 plot(Exp(:,1),Exp(:,2),'ko','LineWidth',1)
 plot(Num(:,1),Num(:,2),'ks','LineWidth',1)
-legend({'DB20','MB20','Gregory (exp.)','Hsiao (num.)'},'FontSize',10)
+legend({'DB20','MB20','Gregory','Hsiao and Lin'},'FontSize',10)
 legend('Location','northwest')
-xlabel('y (mm)','FontSize',10) 
-ylabel('z (mm)','FontSize',10) 
+xlabel('Y (mm)','FontSize',10) 
+ylabel('Z (mm)','FontSize',10) 
 set(gca,'YDir','reverse')
 set(gca,'FontSize',10)
 axis equal

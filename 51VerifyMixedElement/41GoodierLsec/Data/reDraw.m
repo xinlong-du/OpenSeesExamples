@@ -30,7 +30,7 @@ plot(903.88/2/112.98*mixedDispM2135ele20(11:end,1),mixedDispM2135ele20(11:end,5)
 plot(903.88/2/112.98*mixedDispM3231ele20(11:end,1),mixedDispM3231ele20(11:end,5)/18.4,'r--','LineWidth',1)
 plot(903.88/2/112.98*mixedDispM4338ele20(11:end,1),mixedDispM4338ele20(11:end,5)/18.4,'r--','LineWidth',1)
 plot(903.88/2/112.98*mixedDispM5445ele20(11:end,1),mixedDispM5445ele20(11:end,5)/18.4,'r--','LineWidth',1)
-legend([p1 p2 p3],{'Engel (exp.)','DB20','MB20'},'FontSize',10);
+legend([p1 p2 p3],{'Engel and Goodier','DB20','MB20'},'FontSize',10);
 legend('Location','southeast')
 xlim([0 4.0])
 ylim([0 0.03])
