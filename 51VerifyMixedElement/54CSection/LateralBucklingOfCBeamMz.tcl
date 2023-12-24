@@ -83,9 +83,9 @@ set shearCoord [Csection $ColSecTagFiber $IDsteel $D $B $L $t $r $nfdw $nfbf $nf
 set z0 [lindex $shearCoord 0 0];  #z-coord of shear center w.r.t centroid of section
 set y0 [lindex $shearCoord 1 0];  #y-coord of shear center w.r.t centroid of section
 set J  [lindex $shearCoord 2 0];  #Torsional constant
-set GJ [expr $G*$J];
-uniaxialMaterial Elastic $SecTagTorsion $GJ ; # create torsion section
-section Aggregator $BeamSecTag $SecTagTorsion T -section $ColSecTagFiber ;
+#set GJ [expr $G*$J];
+#uniaxialMaterial Elastic $SecTagTorsion $GJ ; # create torsion section
+#section Aggregator $BeamSecTag $SecTagTorsion T -section $ColSecTagFiber ;
 
 set numIntgrPts 5; # number of integration points along each element
 set BeamTransfTag 1;# associate a tag to column transformation			   
@@ -104,7 +104,7 @@ for {set i 1} {$i<$endNode} {incr i 1} {
 set elemID $i
 set nodeI $i
 set nodeJ [expr $i+1]
-element dispBeamColumn $elemID $nodeI $nodeJ $numIntgrPts $BeamSecTag $BeamTransfTag  $y0  $z0;	
+element dispBeamColumn $elemID $nodeI $nodeJ $numIntgrPts $ColSecTagFiber $BeamTransfTag  $y0  $z0;	
 } 
 
 # define initial Perturbation Load
@@ -127,7 +127,7 @@ loadConst -time 0.0; # maintains the load constant for the reminder of the analy
 
 # define RECORDERS
 #-------------------------------------------------------------
-recorder Node -file $dir/8CS2.5x059Mz262inN.out -time -node $middleNode -dof 1 2 3 4 5 6 disp;
+recorder Node -file $dir/8CS2.5x059Mz262inNnoT.out -time -node $middleNode -dof 1 2 3 4 5 6 disp;
 
 # define second stage main Load (Moment at the two ends)
 #------------------------------------------------------------- 

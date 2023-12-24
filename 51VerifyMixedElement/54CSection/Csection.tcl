@@ -206,7 +206,7 @@ for {set i 0} {$i<$NoOfFiber} {incr i 1} {
 #Create fiber section
 #---------------------------------------------------------------------------------
 set poissonX 0.3; #Xinlong
-set GX [expr 201500.0/(2*(1+$poissonX))]; #Xinlong
+set GX [expr 200000.0/(2*(1+$poissonX))]; #Xinlong
 set GJX [expr $GX*$J]; #Xinlong
 section Fiber $secID $yo $xo -GJ $GJX {          
 	for {set i 0} {$i<$NoOfFiber} {incr i 1} {
