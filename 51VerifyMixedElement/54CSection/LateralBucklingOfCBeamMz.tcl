@@ -7,7 +7,7 @@ set startTime [clock clicks -milliseconds];
 #---------------------------------------------------------------------------
 wipe; # clear opensees model
 source Csection.tcl;   # C-section with round corners
-model basic -ndm 3 -ndf 7;# 3 dimensions, 7 dof per node
+model basic -ndm 3 -ndf 6;# 3 dimensions, 7 dof per node
 set dir LateralBuckling;  #set dir lateral buckling of C section
 file mkdir $dir;          # create data directory
 
@@ -41,9 +41,9 @@ node 21	[expr $eleLen*20.0*$in2mm]	0	0
 # define BOUNDARY CONDITIONS (single point constraint)
 #----------------------------------------------------------
 # NodeID,dispX,dispY,dispZ,rotX,RotY,RotZ, Warping 
-fix 1 0 1 1 1 0 0 0;
-fix 11 1 0 0 0 0 0 0;
-fix 21 0 1 1 1 0 0 0; 			
+fix 1 0 1 1 1 0 0;
+fix 11 1 0 0 0 0 0;
+fix 21 0 1 1 1 0 0; 			
 #-------------------------------------------------------
 set startNode 1
 set middleNode 11
@@ -104,14 +104,14 @@ for {set i 1} {$i<$endNode} {incr i 1} {
 set elemID $i
 set nodeI $i
 set nodeJ [expr $i+1]
-element dispBeamColumn $elemID $nodeI $nodeJ $numIntgrPts $BeamSecTag $BeamTransfTag  $y0  $z0  $omg  $cy  $cz;	
+element dispBeamColumn $elemID $nodeI $nodeJ $numIntgrPts $BeamSecTag $BeamTransfTag  $y0  $z0;	
 } 
 
 # define initial Perturbation Load
 #------------------------------------------------------------- 
 pattern Plain 1 Linear {
   # NodeID, Fx, Fy, Fz, Mx, My, Mz, Bx
-  load $middleNode 0 0 0 242.5 0 0 0;#+242.5 for positive branch;  
+  load $middleNode 0 0 0 24.25 0 0;#+242.5 for positive branch;  
   }
 
 constraints Plain;  # Constraint handler -how it handles boundary conditions
@@ -127,14 +127,14 @@ loadConst -time 0.0; # maintains the load constant for the reminder of the analy
 
 # define RECORDERS
 #-------------------------------------------------------------
-recorder Node -file $dir/8CS2.5x059Mz262inP.out -time -node $middleNode -dof 1 2 3 4 5 6 7 disp;
+recorder Node -file $dir/8CS2.5x059Mz262inP.out -time -node $middleNode -dof 1 2 3 4 5 6 disp;
 
 # define second stage main Load (Moment at the two ends)
 #------------------------------------------------------------- 
 pattern Plain 2 Linear {
   # NodeID, Fx, Fy, Fz, Mx, My, Mz, Bx
-  load $startNode 0 0 0 0 0 [expr -4448.2216*25.4] 0; #the applied reference load is 1 kip-in
-  load $endNode   0 0 0 0 0 [expr  4448.2216*25.4] 0;
+  load $startNode 0 0 0 0 0 [expr -4448.2216*25.4]; #the applied reference load is 1 kip-in
+  load $endNode   0 0 0 0 0 [expr  4448.2216*25.4];
 }
 # define ANALYSIS PARAMETERS
 #------------------------------------------------------------------------------------
