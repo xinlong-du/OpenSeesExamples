@@ -13,3 +13,10 @@ ylim([0 30])
 legend('Positive perturbation','Negative perturbation','AISI manual')
 xlabel('Twist angle at midspan (rad)')
 ylabel('Bending moment (kip-in)')
+
+CB_MzN=load('100CS75x3Mz6669mmNnoT.out');
+figure
+plot(CB_MzN(:,5),CB_MzN(:,1))
+%legend('Positive perturbation','Negative perturbation','AISI manual')
+xlabel('Twist angle at midspan (rad)')
+ylabel('Bending moment (kip-in)')

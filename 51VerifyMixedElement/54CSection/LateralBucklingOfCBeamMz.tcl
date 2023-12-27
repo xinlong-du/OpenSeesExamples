@@ -66,11 +66,11 @@ uniaxialMaterial Steel01 $IDsteel $Fy $Es $Bs;	# build steel01 material
 
 # define SECTION DIMENSION AND FIBER DIVISION
 #----------------------------------------------------------------
-set D [expr 8.0*$in2mm];		# Depth
-set B [expr 2.5*$in2mm]; 		# Flange width
-set L [expr 0.773*$in2mm];		# Lip
-set t [expr 0.059*$in2mm];		# section thickness for C-section	
-set r [expr 0.1875*$in2mm];		# corner radius (to inside face)
+set D 100.0;		# Depth
+set B 50.0; 		# Flange width
+set L 16.5;		# Lip
+set t 3.5;		# section thickness
+set r 3.0;		# corner radius (to inside face)
 set nfdw 50;		# number of fibers along web depth
 set nfbf 40;		# number of fibers along flange
 set nfL 10;		# number of fibers along lip
@@ -127,7 +127,7 @@ loadConst -time 0.0; # maintains the load constant for the reminder of the analy
 
 # define RECORDERS
 #-------------------------------------------------------------
-recorder Node -file $dir/8CS2.5x059Mz262inNnoT.out -time -node $middleNode -dof 1 2 3 4 5 6 disp;
+recorder Node -file $dir/100CS75x3Mz6669mmNnoT.out -time -node $middleNode -dof 1 2 3 4 5 6 disp;
 
 # define second stage main Load (Moment at the two ends)
 #------------------------------------------------------------- 
